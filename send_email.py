@@ -42,12 +42,15 @@ def send():
 def festival(msg):
     subprocess.Popen(['festival', '--tts'], stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE).communicate(input=msg)
 
+def pico(msg):
+    subprocess.call(['bash','/home/pi/crazy-speakers/pico.sh', msg])
 
 def talk():
-    festival('You are a ' + random.choice(nouns) + '!')
-    subprocess.call(['bash','/home/pi/crazy-speakers/goog_speak.sh', make_msg()])
+    pico('You are a ' + random.choice(nouns) + '!')
+    pico(make_msg())
 
 print "ready."
+pico("I'm as ready as a " + random.choice(adj) + ' ' +random.choice(nouns))
 
 while True:
     if ( GPIO.input(23) == False ):
