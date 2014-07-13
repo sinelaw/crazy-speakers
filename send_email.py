@@ -16,9 +16,9 @@ server = smtplib.SMTP('smtp.gmail.com', 587)
 #server.starttls()
 #server.login()
 
-nouns = ['monkey','cow','buttefly','penguin','elephant','caterpillar','world','ball','chair','hot wheels car','kipa','sock','duck','race car','monster truck','nose']
-verbs = ['jumped at','mooed at','quacked at','did crazy things to','bonked','flipped','licked','fell on','spun','looked at']
-adj = ['crazy','silly','happy','giant','tiny','weird','dizzy','windy','pink','fast','speedy','super slow','super','rediculous','inredible','unbeleivable','fuzzy']
+nouns = ['baboon','giraffe','table','star','bunny','monkey','cow','buttefly','penguin','elephant','caterpillar','world','ball','chair','hot wheels car','kipa','sock','duck','race car','monster truck','nose']
+verbs = ['ate','tickled','pickled','shaved','pushed','pulled','jumped at','mooed at','quacked at','did crazy things to','bonked','flipped','licked','fell on','spun','looked at']
+adj = ['crazy','silly','happy','giant','tiny','weird','dizzy','hot','red','purple','invisible','wacky','windy','pink','fast','speedy','super slow','super','rediculous','inredible','unbeleivable','fuzzy']
 
 def sendmail(fro, to, subject, body):
     msg = "\r\n".join([
@@ -39,9 +39,13 @@ def send():
     sendmail("test@example.com", random.choice(emails), msg, "the button was pushed")
     print "sent"
 
+def festival(msg):
+    subprocess.Popen(['festival', '--tts'], stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE).communicate(input=msg)
+
+
 def talk():
-    subprocess.call(['./goog_speak.sh', make_msg()])
-    #subprocess.Popen(['festival', '--tts'], stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE).communicate(input=make_msg())
+    festival('You are a ' + random.choice(nouns) + '!')
+    subprocess.call(['bash','/home/pi/crazy-speakers/goog_speak.sh', make_msg()])
 
 print "ready."
 
